@@ -1,4 +1,6 @@
-# Receipt Match Agent
+# Bookkeeping Agent
+
+An AI bookkeeping agent for small businesses.
 
 Matches bank charges to receipt photos, flags problems, then lets an AI agent
 categorize expenses and draft emails to vendors.

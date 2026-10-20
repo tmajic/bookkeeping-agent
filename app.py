@@ -13,8 +13,9 @@ from issues import find_issues
 from matching import match
 from receipts import get_muse_settings, make_client, read_receipt, receipt_with_date
 
-st.set_page_config(page_title="Receipt Match Agent", layout="wide")
-st.title("Receipt Match Agent")
+st.set_page_config(page_title="Bookkeeping Agent", layout="wide")
+st.title("Bookkeeping Agent")
+st.caption("An AI bookkeeping agent for small businesses.")
 st.write("Upload a bank statement CSV and receipt photos, then click **Reconcile**.")
 
 csv_file = st.file_uploader("Bank statement (CSV)", type=["csv"])
