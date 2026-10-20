@@ -35,6 +35,8 @@ Using Muse Spark on the files in `samples/`:
 - Reading the 5 receipts costs about $0.015 the first time. After that the results
   come from the cache and are free.
 
+The receipts and bank statement in samples/ are made up. I created them to test the agent, and none of the businesses or transactions are real.
+
 ## Screenshots
 
 **Matches and issues:** every receipt is paired with its bank charge, and the 3 problems are flagged.
@@ -73,3 +75,17 @@ tokens and $4.25 per million output tokens.
 **Tests** use the correct receipt values from `samples/ANSWER_KEY.md` and a
 `FakeModelClient` (`tests/fake_client.py`) that plays back scripted replies. That
 way the agent loop is tested without calling the API.
+
+## What I learned
+
+**Let code do the math.** Language models can get numbers wrong, so the model only reads the receipts. All of the matching, scoring and arithmetic happens in plain Python, where I can test it and trust the result.
+
+**Real bank data is messy.** Banks often post a charge a day or two after the purchase, and they shorten store names, so "Main Street Hardware" shows up as "MAIN ST HDWE." I had to build the matching to allow for small date gaps and to compare names by similarity instead of looking for an exact match.
+
+**API calls add up.** Every receipt sent to the model costs money, so I save each result using a fingerprint of the image. If the same receipt shows up again, the agent uses the saved answer instead of paying to read it twice.
+
+**Think like a bookkeeper.** At first the agent counted a duplicate charge as two real expenses. A careful bookkeeper wouldn't, so now suspected duplicates are held until someone confirms them.
+
+**Secrets leak in unexpected ways.** While I was setting up the project, a check meant to confirm my API key was saved ended up printing the key itself. I revoked that key right away, made a new one, and changed my checks so they only report whether a value is set, never what it is.
+
+**A local app isn't always private.** By default, the app could be opened by other devices on the same Wi-Fi network, which meant someone else could run it on my API credit. I changed the settings so it only accepts connections from my own computer.
