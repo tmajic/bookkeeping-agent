@@ -1,0 +1,5 @@
+# Streamlit settings for this project.
+[server]
+# Only accept connections from this computer, not from other devices
+# on the network.
+address = "localhost"
