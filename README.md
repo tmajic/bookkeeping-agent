@@ -23,6 +23,32 @@ streamlit run app.py      # open the page, upload samples/bank.csv and samples/r
 pytest -v                 # run the tests (no API calls, no key needed)
 ```
 
+## Results on the sample data
+
+Using Muse Spark on the files in `samples/`:
+
+- All 5 receipts are read correctly (vendor, date and total match `samples/ANSWER_KEY.md`).
+- All 3 planted problems are caught: a duplicate Main St Hardware charge, a $7.00
+  tip mismatch at Harbor Grill, and a missing Brightline Print & Sign receipt.
+  The $2,400 deposit is correctly skipped.
+- The agent finishes in 3-4 of its 10 steps for about $0.02.
+- Reading the 5 receipts costs about $0.015 the first time. After that the results
+  come from the cache and are free.
+
+## Screenshots
+
+**Matches and issues:** every receipt is paired with its bank charge, and the 3 problems are flagged.
+
+![Matches and issues](docs/matches-and-issues.png)
+
+**Categories and drafted emails:** the duplicate charge is held instead of being counted as an expense.
+
+![Categories and drafted emails](docs/categories-and-emails.png)
+
+**Agent run:** steps used, tokens and estimated cost.
+
+![Agent run](docs/agent-run.png)
+
 ## How it works
 
 | Step | File | Who does it |
