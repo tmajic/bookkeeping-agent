@@ -1,0 +1,11 @@
+# Secrets - never commit your API key
+.env
+
+# Cached receipt readings (regenerated automatically)
+receipt_cache.json
+
+# Python clutter
+__pycache__/
+.venv/
+.pytest_cache/
+.DS_Store
