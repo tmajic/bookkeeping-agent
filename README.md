@@ -76,6 +76,10 @@ tokens and $4.25 per million output tokens.
 `FakeModelClient` (`tests/fake_client.py`) that plays back scripted replies. That
 way the agent loop is tested without calling the API.
 
+## How I built this
+
+I built this project with Claude Code, an AI coding assistant. I made the design decisions and checked the work: I chose to keep all matching and math in Python, created the test data with planted problems to verify the results, reviewed and tested each part, and fixed the issues I found along the way, including the security problems described below.
+
 ## What I learned
 
 **Let code do the math.** Language models can get numbers wrong, so the model only reads the receipts. All of the matching, scoring and arithmetic happens in plain Python, where I can test it and trust the result.
